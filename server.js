@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 //will read the index.js files in each of the dircetories indicated
-const apiRoutes = require('./routes/apiRoutes');
+const apiRoutes = require('./routes/apiRoutes/apiRoutes');
 
 //middleware functions that allow us to keep our route endpoint callback function
   //express.static method provided a file path to a location in our application
