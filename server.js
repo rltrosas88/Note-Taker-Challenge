@@ -2,9 +2,7 @@ const fs = require('fs');
 const express = require('express');
 //module built in the Node.js API that provides utilities for working with file and directory paths
   //it makes working with our file system more predictable
-const path = require("path")
-//require the data
-const { notes } = require('./db/db.json')
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3001;

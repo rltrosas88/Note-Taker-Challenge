@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { notes } = require('../../db/db.json')
 const router = require('express').Router();
 
@@ -12,7 +13,7 @@ function writeToDb(notes) {
   }
 
 router.get('/api/notes', (req, res) => {
-    console.log(req.query);
+    //console.log(req.query);
     res.json(notes);
 });
 
