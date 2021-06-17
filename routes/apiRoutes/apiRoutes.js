@@ -40,7 +40,7 @@ function validate(note) {
   }
 };
 
-function delete(newNotesArray) {
+function deleteNotes(newNotesArray) {
   fs.writeFileSync (
     path.join(__dirname, "../../db/db.json"),
     JSON.stringify(newNotesArray)
@@ -55,22 +55,20 @@ router.get('/api/notes', (req, res) => {
 });
 
 router.post('/api/notes', (req, res) => {
-    //req.body.id = notes.length.toString();
+    req.body.id = notes.length.toString();
 
-    if (notes.length == 0){
-      req.body.id = "0";
+    if (!validate(req.body)) {
+      res.status(400).send('Not properly formatted.');
     } else {
-      req.body.id = JSON.stringify(JSONparse(notes[notes.length - 1].id) = 1);
-    }
-    console.log("req.body.id: " + req.body.id);
-
-    notes.push(req.body);
-
-    writeToDb(notes);
-    console.log(notes);
-
+      const note = create(req.body, notes);
     res.json(req.body);
+    }
   });
 
+router.delete('/api/notes/:id', (req, res) => {
+  const id = req.params.id;
+  notes = deleteNotes(filterByQuery(id, notes))
+  res.json(notes)
+});
 
   module.exports = router;
