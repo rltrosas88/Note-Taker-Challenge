@@ -51,7 +51,7 @@ function deleteNotes(newNotesArray) {
 router.get('/api/notes', (req, res) => {
   let results = notes;  
   //console.log(req.query);
-    res.json(notes);
+    res.json(results);
 });
 
 router.post('/api/notes', (req, res) => {
