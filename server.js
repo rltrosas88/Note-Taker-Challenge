@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 3001;
 
 //will read the index.js files in each of the dircetories indicated
 const apiRoutes = require('./routes/apiRoutes/apiRoutes');
+const htmlRoutes = require('./routes/htmlRoutes/htmlRoutes');
 
 //middleware functions that allow us to keep our route endpoint callback function
   //express.static method provided a file path to a location in our application
-//app.use(express.static('public'));
+app.use(express.static('public'));
 //method that is built in to Express.js that takes incoming POST data and converts it to key/value pairings that can be accessed in the req.body object
 app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
@@ -55,6 +56,18 @@ app.use(express.json());
   });
 
 
+app.get("/notes", function(req, res) {
+  console.log(req.query);
+  res.sendFile(path.join(__dirname, "../../public/notes.html"));
+});
+
+app.get("/", function(req,res) {
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/index.html'));
+});
 
 
 app.listen(PORT, () => {
