@@ -21,54 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
 app.use(express.json());
 
-
-  function writeToDb(notes) {
-    notes = JSON.stringify(notes);
-    console.log(notes);
-    fs.writeFileSync("./db/db.json", notes, function(err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
-  }
-
-  app.get('/api/notes', (req, res) => {
-    console.log(req.query);
-    res.json(notes);
-  });
-
-  app.post('/api/notes', (req, res) => {
-    //req.body.id = notes.length.toString();
-
-    if (notes.length == 0){
-      req.body.id = "0";
-    } else {
-      req.body.id = JSON.stringify(JSONparse(notes[notes.length - 1].id) = 1);
-    }
-    console.log("req.body.id: " + req.body.id);
-
-    notes.push(req.body);
-
-    writeToDb(notes);
-    console.log(notes);
-
-    res.json(req.body);
-  });
-
-
-app.get("/notes", function(req, res) {
-  console.log(req.query);
-  res.sendFile(path.join(__dirname, "../../public/notes.html"));
-});
-
-app.get("/", function(req,res) {
-  res.sendFile(path.join(__dirname, "../../public/index.html"));
-});
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/index.html'));
-});
-
+app.use('/api', apiRoutes);
+app.use('/', htmlRoutes);
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
