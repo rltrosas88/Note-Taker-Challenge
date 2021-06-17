@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
 app.use(express.json());
 
-function (app) {
+
   function writeToDb(notes) {
     notes = JSON.stringify(notes);
     console.log(notes);
@@ -53,7 +53,7 @@ function (app) {
 
     res.json(req.body);
   });
-}
+
 
 
 
