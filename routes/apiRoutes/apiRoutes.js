@@ -35,20 +35,4 @@ router.post('/api/notes', (req, res) => {
     res.json(req.body);
   });
 
-
-router.delete('api/notes/:id', (req, res) => {
-    let id = req.params.id.toString();
-    console.log(id);
-
-    for (var i = 0; i < notes.length; i++) {
-      if (notes[i].id == id) {
-        console.log("match");
-        res.send(notes[i]);
-        notes.splice(i, 1);
-        break;
-      }
-    }
-    writeToDb(notes);
-});
-
   module.exports = router;
